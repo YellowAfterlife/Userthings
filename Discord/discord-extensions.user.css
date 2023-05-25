@@ -1,0 +1,62 @@
+/* ==UserStyle==
+@name           Discord extensions
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Various tweaks for Discord Web
+@preprocessor less
+@var  checkbox  vStatusPad "Status bar padding" 1
+@var  checkbox  vHideNitro "Hide Nitro-related items" 1
+@var  checkbox  vHideUncommonMsgCtx "Hide uncommon message menu items" 1
+@var  checkbox  vEnlargeEmojiPopup "Big emojis in popups" 1
+@author         YellowAfterlife
+==/UserStyle== */
+
+@-moz-document domain("discord.com") {
+    #app-mount { --font-display: system-ui; }
+    /* statusbar padding */
+    html when(@vStatusPad = 1) {
+        form[class^="form-"],
+        section[class^="panels"][aria-label^="User"] {
+            border-bottom: solid 1.25em var(--background-secondary-alt);
+        }
+    }
+    
+    html when(@vHideNitro = 1) {
+        form[class^="form"] div[class^="channelTextArea"] div[class^="buttons"] button[aria-label="Send a gift"] {
+            display: none;
+        }
+        
+        div[aria-label="Add Super Reaction"][class^="button"] {
+            display: none;
+        }
+        div[id^="message-reactions"] > div[aria-label="Add Super Reaction"] {
+            display: none;
+        }
+        
+        #message-actions div[class^="item"][class*="colorPremium"],
+        #message div[class^="item"][class*="colorPremium"] {
+            display: none;
+        }
+    }
+    
+    html when(@vHideUncommonMsgCtx = 1) {
+        #message-actions #message-actions-mark-unread,
+        #message #message-mark-unread,
+        #message-actions #message-actions-tts,
+        #message #message-tts {
+            display: none;
+        }
+    }
+    
+    /* fix pure-white names unreadable in light theme */
+    html.theme-light span[role="button"][class^="username"][style="color: rgb(255, 255, 255);"] {
+        color: black!important;
+    }
+    div[class^="emojiSection"] > div[class^="flex"] > img[class^="emoji"] {
+        width: 128px!important;
+        height: 128px!important;
+    }
+    div[class^="emojiSection"] > div[class^="flex"] > img[class^="emoji"] + div {
+        width: 100px;
+    }
+}

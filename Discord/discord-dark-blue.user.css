@@ -1,0 +1,23 @@
+/* ==UserStyle==
+@name           discord.com - 5/12/2023, 1:16:48 PM
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         YellowAfterlife
+==/UserStyle== */
+
+@-moz-document url-prefix("https://discord.com/channels/") {
+    html.theme-dark {
+        --background-primary: #1f3059;
+        --background-secondary: #001C40;
+        --background-secondary-alt: #011937;
+        --background-tertiary: #001733;
+        --bg-overlay-2: #1f3059;
+        --bg-overlay-chat: #011937;
+        --channeltextarea-background: #405080;
+        --scrollbar-thin-track: #001733;
+        --scrollbar-auto-track: #001733;
+        --scrollbar-thin-thumb: #405080;
+        --scrollbar-auto-thumb: #405080;
+    }
+}

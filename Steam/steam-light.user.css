@@ -1,0 +1,300 @@
+/* ==UserStyle==
+@name           Steam: light[-ish] mode
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         YellowAfterlife
+==/UserStyle== */
+
+@-moz-document domain("steamcommunity.com"), domain("store.steampowered.com"), domain("partner.steamgames.com") {
+body,
+.game_page_background,
+.apphub_background{
+    background: #405070 !important;
+}
+
+body::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0.1);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0;
+}
+/* Black-on-white[-ish] */
+.guide.subSections,
+.group_overview_announcement_content,
+.group_content:not(.group_comments),
+.group_content.group_summary,
+div[class^="partnereventdisplay_EventBody_"],
+#docMainContentArea {
+    background: #f9f9f9;
+    color: black;
+}
+/* Node background */
+#highlightContent.workshopItemDescription,
+.game_area_description,
+.landingLeftCol,
+.review_area,
+.review_box .rightcol, .review_box .shortcol,
+.rightcol .review_box.short,
+.review_box.partial .content .gradient,
+.rightcol .review_box.partial .content .gradient,
+.forumtopic_comments .commentthread_comment,
+.forumtopic_comments .commentthread_comment.commentthread_newcomment,
+.forum_op,
+.commentthread_comment_content {
+	background: #f9f9f9;
+}
+
+.forumtopic_comments .commentthread_comment.commentthread_newcomment {
+    box-shadow: -5px 0 0 0 #F59 inset;
+}
+/* Node text color */
+#highlightContent.workshopItemDescription,
+.game_area_description,
+.game_area_description ul,
+.game_area_description ul strong,
+.grouppage_content_area h1,
+#game_area_description h2,
+div.game_area_description h2,
+.landingTable,
+.landingTable th, .landingTable .th,
+.landingTable td, .landingTable .td,
+.landingLeftCol,
+.landingLeftCol p,
+.landingLeftCol b,
+.landingLeftCol code,
+.landingLeftCol pre,
+.section .descriptor,
+.AdminPageContent strong,
+.review_area_content,
+.review_box .content,
+.review_box .shortcol .content,
+.review_box .vote_header .title,
+.review_box .vote_header .hours,
+.review_box .short_header,
+.review_box .postedDate,
+.review_box .control_block .text,
+.EventDetailsBody .BB_Header2,
+.EventDetailsBody .BB_Header3,
+.commentthread_comment_text,
+.forum_op .topic, .forum_op .content,
+.forumtopic_comments .commentthread_comment_text,
+.dynamiclink_content, .dynamiclink_type, .dynamiclink_author, .dynamiclink_name .dynamiclink_type,
+.docPageTitle, .documentation_bbcode h2.bb_subsection, .documentation_bbcode h2.bb_section,
+.documentation_bbcode .bb_code.nohighlight, .documentation_bbcode .bb_code_inline.nohighlight,
+#docMainContentArea p
+{
+	color: black;
+}
+/* Link colors */
+.guide .detailBox a,
+.game_area_description a,
+.group_summary a,
+.landingLeftCol a,
+.review_area_content a,
+.review_box .rightcol a,
+.forum_op_author,
+.forum_op .content a, .forum_op .content a:hover,
+.commentthread_comment_text a, .commentthread_comment_text a:hover,
+.forumtopic_comments .commentthread_comment_text a, .forumtopic_comments .commentthread_comment_text a:hover,
+.commentthread_comment_author a,
+.dynamiclink_url a, .dynamiclink_authorname, .dynamiclink_name,
+#highlightContent.workshopItemDescription a,
+.EventDetailsBody a:not(.LinkButton),
+#docMainContentArea a{
+	color: #1982d1;
+}
+/* External link */
+.grouppage_content_area img[src$="/iconExternalLink.gif"] {
+    filter: invert(100%);
+}
+/* Input backgrounds */
+#post_announcement_form .gray_bevel,
+.gray_bevel.for_text_input input,
+.forumtopic_reply_entry .gray_bevel,
+.forum_newtopic_input_area .gray_bevel,
+.editGuideSubSectionDescField,
+.commentthread_entry_quotebox,
+.commentthread_comment_edit_textarea_ctn {
+	background: white;
+}
+/* Input text colors */
+#post_announcement_form input,
+#post_announcement_form textarea,
+.gray_bevel.for_text_input input,
+.editGuideSubSectionDescField,
+.forum_newtopic_input_area input,
+.forum_newtopic_input_area textarea,
+textarea.forumtopic_reply_textarea,
+.commentthread_entry_quotebox textarea,
+.commentthread_comment_edit_textarea_ctn textarea{
+	color: black;
+}
+/* Padding to cope with now-different backgrounds */
+.review_area_content,
+.guide.subSections,
+#highlightContent.workshopItemDescription,
+.game_area_description,
+.landingLeftCol {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.group_overview_announcement_content {
+    padding: 3px 5px;
+}
+.group_overview_announcement.first {
+    margin-right: 0;
+    padding-right: 0;
+}
+.guide .detailBox {
+	background-image: none;	
+}
+.review_box .rightcol {
+	margin-left: 9px;
+	padding-left: 5px;
+}
+.review_box.partial .content .gradient {
+	opacity: 0.9;
+	text-align: center;
+}
+.review_box.partial .content .gradient::before {
+	content: "● ● ●";
+	line-height: 30px;
+}
+.review_box a.vote_header, .review_box a.vote_header:hover,
+.review_box .short_header {
+	background: #e3e3e3;
+}
+.rightcol .review_box.short {
+	opacity: 1;
+}
+.review_box .vote_header .review_source,
+.review_box .short_header .review_source {
+	opacity: 1;
+}
+
+.game_area_sys_req ul li strong,
+#game_area_legal,
+.group_content_header,
+.sysreq_tab, .discselect_tab,
+.user_reviews_most_helpful_days {
+    color: rgba(255,255,255,0.8);
+}
+
+/* BB: */
+/*.subSectionTitle, div.bb_h1 {
+	color: black;
+	font-weight: bold;
+	line-height: 1.5;
+	border-bottom: 1px solid #ccc;
+}*/
+/* Comments: */
+.commentthread_comment_content {
+	padding: 2px 4px 2px 4px;
+	margin: -2px 0 -2px -4px;
+}
+a.commentthread_author_valve, a.commentthread_author_developer,
+.commentthread_workshop_authorbadge {
+	color: #60d070;
+}
+.forumtopic_comments .commentthread_comment .commentthread_comment_author {
+	opacity: 1;
+	filter: none;
+}
+/* Dynamic link boxes (screenshots, etc): */
+.dynamiclink_box {
+	background: white;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+	border-color: #aaa;
+}
+.forum_op,
+.forumtopic_comments .commentthread_comment,
+#review_histograms_container {
+    border: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+/* technical documentation */
+.landingLeftCol code, .landingLeftCol pre {
+	font-family: Consolas, monospace;
+	font-size: 100%;
+}
+.landingLeftCol pre {
+	overflow-x: auto;
+}
+
+.dynamiclink_content {
+    text-shadow: none;
+}
+
+/* documentation tables */
+#docMainContentArea table {
+    border-spacing: 1px;
+    background: #aaa;
+}
+#docMainContentArea th, #docMainContentArea td {
+    color: black;
+}
+#docMainContentArea th,
+.landingTable th, .landingTable .th {
+    background: #f0f0f0;
+}
+#docMainContentArea td,
+.landingTable td, .landingTable .td {
+    background: white;
+}
+
+/* documentation code */
+.documentation_bbcode .bb_code:not(.bb_code_inline) {
+    background: #1E1F22;
+}
+.documentation_bbcode .bb_code.bb_code_inline.hljs {
+    color: black;
+    font-family: Consolas;
+    font-size: 90%;
+}
+span.bb_spoiler {
+    background-color: #468;
+    color: transparent;;
+}
+span.bb_spoiler:hover,
+.landingTable a.tr:hover .td, .landingTable .tr.highlightHover:hover .td
+{
+    background-color: #feb;
+    color: black;
+}
+
+.EventDetailsBody {
+    color: black !important;
+    border-right: 1px solid #ccc;
+}
+
+}
+
+@-moz-document url-prefix("https://steamcommunity.com/chat/") {
+.ChatHistoryContainer {
+    background: white;
+    color: black;
+}
+.chatWindow .chatEntry {
+    background: #e0e0e0;
+}
+.msgText, .MultiUserChat .isCurrentUser .msgText {
+    color: black;
+}
+.chatEntry > form {
+    background: white;
+}
+.chatEntry > form > textarea {
+    color: black;
+}
+.msg:hover {
+    background: #feb !important;
+}
+.FriendChatTypingNotification {
+    background: transparent;
+}
+.ChatRoomGroupDialog_history div[class^="insetshadow_FriendsListInsetShadowCtn"] {
+    display: none;
+}
+}

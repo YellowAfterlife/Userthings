@@ -1,0 +1,73 @@
+@-moz-document domain("discordapp.com"), domain("discord.com") {
+body {
+    font-family: Comic Sans MS;
+}
+.theme-dark, .theme-light {
+    --header-primary: #060607;
+    --header-secondary: #4f5660;
+    --text-normal: #2e3338;
+    --text-muted: #00000085;
+    --text-link: #e0007b;
+    --channels-default: #6a7480;
+    --interactive-normal: #4f5660;
+    --interactive-hover: #2e3338;
+    --interactive-active: #060607;
+    --interactive-muted: #c7ccd1;
+    --background-primary: #60f9ab;
+    --background-secondary: #7afcff;
+    --background-secondary-alt: #ffeb65;
+    --background-tertiary: #ff95cf;
+    --background-accent: #747f8d;
+    --background-floating: #fff;
+    --background-mobile-header: #fff;
+    --background-modifier-hover: rgba(116,127,141,0.08);
+    --background-modifier-active: rgba(116,127,141,0.16);
+    --background-modifier-selected: rgba(116,127,141,0.24);
+    --background-modifier-accent: rgba(6,6,7,0.08);
+    --elevation-low: 0 1px 0 rgba(6,6,7,0.1),0 1.5px 0 rgba(6,6,7,0.025),0 2px 0 rgba(6,6,7,0.025);
+    --elevation-high: 0 8px 16px rgba(0,0,0,0.16);
+    --logo-primary: #7289da;
+    --guild-header-text-shadow: 0 1px 1px hsla(0,0%,100%,0.4);
+    --channeltextarea-background: #ff91c8;
+    --activity-card-background: #fff;
+    --textbox-markdown-syntax: #6a7480;
+    --deprecated-panel-background: #ffeb65;
+    --deprecated-card-bg: #f8f9f9;
+    --deprecated-card-editable-bg: rgba(246,246,247,0.6);
+    --deprecated-store-bg: #f8f9f9;
+    --deprecated-quickswitcher-input-background: #fff;
+    --deprecated-quickswitcher-input-placeholder: rgba(79,84,92,0.3);
+    --deprecated-text-input-bg: rgba(79,84,92,0.02);
+    --deprecated-text-input-border: rgba(79,84,92,0.3);
+    --deprecated-text-input-border-hover: #b9bbbe;
+    --deprecated-text-input-border-disabled: #dcddde;
+    --deprecated-text-input-prefix: #b9bbbe;
+}
+div[class*="scrollerThemed"]>div[class^="scroller"]::-webkit-scrollbar-thumb {
+    background-color: var(--background-tertiary)!important;
+    border-color: var(--background-tertiary)!important;
+}
+div[class*="scrollerThemed"]>div[class^="scroller"]::-webkit-scrollbar-track-piece {
+    background-color: transparent!important;
+    border-color: transparent!important;
+    /*background-color: var(--background-secondary-alt)!important;
+    border-color: var(--background-secondary-alt)!important;*/
+}
+div[class^="tutorialContainer"] svg {
+    opacity: 0;
+}
+div[class^="tutorialContainer"] div[class^="listItemWrapper"]{
+    background-color: var(--background-primary);
+    border-radius: 50%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAIjSURBVEhLtddPSBRhHMbxSSNJo0sGhmh/pA51MUiQFBSCLtLJQ3TpFoh3DxV07NAp0kNiePHSMbAOCYIHD4oWYnRQKL3UwYtQQYhRfZ93Z5Zfs7+Znd30gc/O7sz77js78877vnskqsw13MMgzuE3PmMey+hCG47iO3RsFStQ2cJpwTRU6U8ddvAUZ1E1amwR3hfV6iceowmZ0S/zKv8PXf52VET3rN7LWI3ubyf+ySS8wgflA04gRL10A5fCp2JZh3rkLnTvL2MAeXkB9fyQPXhnlvYWp+GlEXPw6oluWS9C1Ku8QpYas9Fz2I2T4VMpt+DVTbxGyEd4BawLSPIK9tgnPMIXs8+zjw5Ez+IdeWy840WNNPDyEtVyKt4qE/G2nvTp5Sa8s7HGYaOe+QZe2TxLiO6YHXkeIJ1m6GS88p5NFG5QNDsMIx3NIF75tNBgkUvqGYNND7xyVrik582OWmnQ0EOfxCtjzaiXbuEr6skxDJXehnyLt1n5EW+j5/DOKPEE1zFr9iWOI0n6WJoGmZBqU5QGaRuVv1p6W84ovLqWhtFyNNZ5hUS9qxVZuQ+vXtqeXURdxHuU566MrEHjpjrLFYTxsWDCY2FzF4c1+4sm+4o8xGE0qu/UvXczgiLzZC20UMuNzuYdvMq10hI03dPdqGPcxgJ+wfuyPLqM+mXlxrylflbOoB+amuxSXyOVevgNaGWg0WsbOskp6G9AnCj6Cz8e52SlOIgVAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+div[class^="scrollbar-"] {
+    background-color: transparent!important;
+}
+span.mention[role="button"] {
+    background-color: var(--background-tertiary);
+    color: var(--text-link);
+}
+}

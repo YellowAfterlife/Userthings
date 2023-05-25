@@ -1,0 +1,26 @@
+/* ==UserStyle==
+@name           itch.io: compact project upload list
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Compresses the uploads list on project editing page a little.
+@author         YellowAfterlife
+==/UserStyle== */
+
+@-moz-document url-prefix("https://itch.io/game/edit/") {
+.game_edit_upload_list_widget .uploader .upload_field_toggle, .game_edit_upload_list_widget .uploader .upload_price_picker {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader .meta_data,
+.game_edit_upload_list_widget .uploader .upload_type {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader .upload_title {
+    margin-top: 3px;
+}
+}

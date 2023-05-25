@@ -1,0 +1,68 @@
+/* ==UserStyle==
+@name           itch.io: project uploads orderer
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Compresses project uploads list to extent where it's easy to order items.
+@author         YellowAfterlife
+==/UserStyle== */
+
+@-moz-document url-prefix("https://itch.io/game/edit/") {
+.game_edit_upload_list_widget .uploader .upload_type,
+.game_edit_upload_list_widget .uploader .upload_price_picker,
+.game_edit_upload_list_widget .uploader .upload_stats,
+.game_edit_upload_list_widget .uploader .delete_btn,
+.game_edit_upload_list_widget .uploader .upload_field_toggle,
+.game_edit_upload_list_widget .uploader .more_btn{
+    display: none;
+}
+
+.game_edit_upload_list_widget .uploader.is_hidden .upload_display_name {
+    opacity: 0.5;
+}
+
+.game_edit_upload_list_widget .uploader .meta_data {
+    font-size: 0;
+}
+
+.game_edit_upload_list_widget .uploader a.move_down_btn,
+.game_edit_upload_list_widget .uploader a.move_up_btn {
+    position: absolute;
+    right: 0.25rem;
+    top: calc(50% - 1rem);
+    line-height: 1;
+    padding: 0.25rem;
+    font-size: 0;
+    transform: rotate(90deg);
+    text-decoration: none;
+}
+.game_edit_upload_list_widget .uploader a.move_down_btn:hover,
+.game_edit_upload_list_widget .uploader a.move_up_btn:hover {
+background:rgba(0,0,0,0.05)
+}
+.game_edit_upload_list_widget .uploader a.move_up_btn {
+    right: 2.25rem;
+    transform: rotate(90deg) scale(-1,1);
+}
+.game_edit_upload_list_widget .uploader a.move_down_btn:before,
+.game_edit_upload_list_widget .uploader a.move_up_btn:before{
+    font-size: 1.5rem;
+    content: "➜";
+}
+
+.game_edit_upload_list_widget .uploader .upload_field_toggle, .game_edit_upload_list_widget .uploader .upload_price_picker {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader .meta_data,
+.game_edit_upload_list_widget .uploader .upload_type {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.game_edit_upload_list_widget .uploader .upload_title {
+    margin-top: 3px;
+}
+}

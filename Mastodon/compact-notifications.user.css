@@ -1,0 +1,214 @@
+/* ==UserStyle==
+@name Compact notifications for Mastodon
+@namespace yal.cc
+@version 1.1.0
+@description Compresses Mastodon notifications slightly (now with settings).
+@author YellowAfterlife
+@preprocessor less
+@var  text      vMaxHeight "Maximum height" "100px"
+@var  checkbox  vUseBackgroundColor "Use custom background color" 0
+@var  color     vBackgroundColor "Custom background color" #282c37
+@var  select    vFavBoostHeaderStyle "🔁/⭐ Header style" {
+	"default:Default": "default",
+	"small:Smaller*": "small",
+	"tiny:Smallest": "tiny"
+}
+@var  select    vAttachmentStyle "Attachment style" {
+	"default:Default": "default",
+	"oneline:One-line*": "oneline",
+	"counter:Counter": "counter"
+}
+==/UserStyle== */
+@-moz-document domain("mastodon.gamedev.place"), domain("mastodon.social") {
+	/* We don't need the name of the user twice, can collapse "followed you" into notification itself */
+	.notification-follow .notification__message {
+		padding-top: 4px;
+	}
+	.notification-follow:not(:focus) .notification__message {
+		display: none;
+	}
+	.notification-follow .account {
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	.notification-follow:not(:focus) .account .display-name__html:after {
+		content: " followed you";
+	}
+	
+	/* no better way to do this, is there */
+	body { --notification-background-color: transparent; }
+	body.theme-mastodon-light { --notification-background-color: #fff; }
+	body.theme-default { --notification-background-color: #282c37; }
+	body.theme-contrast { --notification-background-color: #282c37; }
+	body[class] when (@vUseBackgroundColor = 1) {
+		--notification-background-color: @vBackgroundColor;
+	}
+
+	/* Prevent favourite/reblog notifications from taking up too much space */
+	.notification-reblog, .notification-favourite {
+		.notification__message {
+			padding-top: 4px;
+		}
+		.status {
+			padding-top: 4px;
+			padding-bottom: 4px;
+		}
+		
+		&:not(:focus) {
+			.status__content {
+				min-height: 1em;
+				max-height: @vMaxHeight;
+				padding-bottom: 4px;
+			}
+			/* collapse attachments list */
+			.attachment-list.compact .attachment-list__list when(@vAttachmentStyle = oneline) {
+				display: flex;
+				flex-direction: row;
+				li {
+					overflow: hidden;
+					flex-grow: 1;
+					height: 1rem;
+					word-break: break-all;
+				}
+			}
+			.status__content when(@vAttachmentStyle = counter) {
+				margin-bottom: -1.25rem;
+			}
+			.status__content + .status__action-bar when(@vAttachmentStyle = counter) {
+				margin-top: 1.5rem;
+			}
+			.attachment-list.compact when(@vAttachmentStyle = counter) {
+				position: relative;
+				z-index: 100;
+				display: flex;
+				flex-direction: row;
+				justify-content: end;
+				border-radius: 0;
+				.attachment-list__list {
+					background-color: var(--notification-background-color);
+					counter-reset: attachementCount;
+					display: flex;
+					flex-direction: row;
+					padding: 0.2em;
+					border-radius: 25%;
+					flex-shrink: 1;
+					li {
+						line-height: 1;
+						padding: 0;
+						font-size: 0;
+						counter-increment: attachementCount;
+						.fa {
+							font-size: 1rem;
+						}
+					}
+					li:not(:first-child):not(:last-child) a{
+						display: none;
+					}
+					li:last-child {
+						font-size: 0;
+						&:not(:first-child) .fa {
+							display: none;
+						}
+						a:after {
+							font-size: 1rem;
+							padding-left: 0.25ch;
+							content: counter(attachementCount);
+						}
+					}
+				}
+			}
+			
+			.status when(@vFavBoostHeaderStyle = small) {
+				.status__relative-time {
+					height: 24px;
+				}
+				.status__display-name {
+					.status__avatar, .account__avatar-overlay {
+						height: 24px !important;
+					}
+					.account__avatar-overlay-base .account__avatar {
+						width: 24px !important;
+						height: 24px !important;
+					}
+					.display-name__account {
+						display: none;
+					}
+				}
+			}
+			
+			/* do a little fade at the end of message content */
+			.status__content:after {
+				content: "";
+				position: absolute;
+				background-image: linear-gradient(to bottom, transparent, var(--notification-background-color));
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 10px;
+			}
+		}
+		
+		&:not(:focus) when(@vFavBoostHeaderStyle = tiny) {
+			--status-height: 24px;
+			>.notification__message {
+				height: calc(var(--status-height) - 2px) ;
+				overflow: hidden;
+				span[title] {
+					padding-left: 20px;
+					visibility: hidden;
+					bdi {
+						visibility: visible;
+					}
+				}
+			}
+			>.notification__message + div {
+				pointer-events: none;
+			}
+			.status__wrapper {
+				margin-top: calc(-2px - var(--status-height));
+			}
+			.status {
+				>*:not(.status__info), .status__relative-time {
+					pointer-events: all;
+				}
+			}
+			.status__relative-time, .status__info, .status__avatar {
+				height: var(--status-height);
+			}
+			.account__avatar-overlay {
+				height: var(--status-height) !important;
+			}
+			.status__info {
+				margin-bottom: 0;
+			}
+			.status__display-name {
+				.display-name {
+					display: none;
+				}
+				visibility: hidden;
+				.account__avatar-overlay-overlay {
+					visibility: visible;
+					top: 1px;
+					right: inherit;
+					left: 22px;
+					bottom: inherit;
+					.account__avatar {
+						width: 20px !important;
+						height: 20px !important;
+					}
+				}
+			}
+		} /* end tiny header */
+	}
+
+	.notification-reblog .status__info,
+	.notification-favourite .status__info {
+		margin-bottom: 4px;
+	}
+	.notification-favourite .attachment-list,
+	.notification-favourite .status__action-bar,
+	.notification-reblog .attachment-list,
+	.notification-reblog .status__action-bar{
+		margin-top: 4px;
+	}
+}

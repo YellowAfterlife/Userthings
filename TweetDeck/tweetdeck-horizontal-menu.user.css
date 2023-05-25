@@ -1,0 +1,117 @@
+/* ==UserStyle==
+@name TweetDeck: Horizontal menu
+@namespace https://yal.cc
+@version 1.0
+@description Moves the menu to the top of the page instead
+@author YellowAfterlife
+@preprocessor less
+==/UserStyle== */
+
+@-moz-document domain("web.tweetdeck.com"), domain("tweetdeck.twitter.com") {
+html[class] body .application.is-condensed {
+    .app-header {
+        width: 100%;
+	    height: 50px;
+    }
+    .app-header-inner {
+        display: flex;
+        width: inherit;
+        
+        .tweet-button,
+        .js-search,
+        .column-nav-item,
+        .app-nav-link,
+        .js-header-action {
+            width: 40px;
+            height: 40px;
+            margin-right: 4px;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .app-search-fake {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            > i {
+                height: 1em;
+                margin: 0;
+                margin-top: -6px;
+                &:before {
+                    line-height: 1;
+                }
+            }
+        }
+        
+        .tweet-button, .js-search {
+            top: -5px;
+            margin-right: 8px;
+        }
+        
+        .attach-compose-buttons {
+            margin-right: 0;
+            .tweet-button {
+                border-radius: 45px 45px 45px 0;
+            }
+        }
+        
+        .column-navigator {
+            left: 105px;
+            right: 45px;
+            top: 8px;
+            bottom: -1px;
+            .js-column-nav-list {
+                display: flex;
+                ul {
+                    display: flex;
+                }
+                .column-nav-updates {
+                    right: 0px;
+                }
+            }
+            .obj-left { /* icons inside buttons */
+                width: 100%;
+                margin-right: 0;
+                text-align: center;
+                > i {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+            .with-nav-border-t:before { /* ruler before the Add Column button */
+                display: none;
+            }
+        }
+        
+        .app-navigator {
+            left: inherit;
+            right: 0;
+            width: 40px;
+            bottom: 5px;
+            margin-bottom: 0 !important;
+            display: flex;
+        }
+        
+        .pos-br {
+            top: 40px;
+            bottom: auto;
+            right: 5px;
+            left: auto;
+        }
+        
+    }
+    
+    .app-content { /* re-align content since the menu's on top now */
+        margin-top: 50px;
+        margin-left: -60px;
+    }
+    
+    .btd-logo-title {
+        display: none;
+    }
+    & ~ .column-nav-flyout { /* the hover bar showing what buttons do */
+        top: 50px !important;
+    }
+}
