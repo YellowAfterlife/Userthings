@@ -1,4 +1,4 @@
-# Compact Notifications
+## Compact Notifications
 
 **Links:** [userstyles.world](https://userstyles.world/style/7405/mastodon-compact-notifications)
 
