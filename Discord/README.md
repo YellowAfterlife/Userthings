@@ -27,6 +27,14 @@ Replaces the "Help" button with a button to collapse the server list and channel
 
 A somewhat reasonable way to keep track of two or three conversations at once (by opening additional tabs/windows with Discord Web).
 
+## [Copy Emoji URL](discord-copy-emoji-url.user.js) (js)
+
+![](discord-copy-emoji-url.png)
+
+Clicking on an inaccessible
+(e.g. because you don't have Nitro and it's from a different server)
+emoji now copies its URL instead. Such emojis are marked in the picker with a dashed outline.
+
 ## [Tray icon](https://github.com/YAL-Tools/TrayIconForDiscordWeb) (js, Windows)
 
 ![](https://github.com/YAL-Tools/TrayIconForDiscordWeb/raw/main/screenshot.png)
