@@ -30,11 +30,12 @@
         for (let rx of [
             /\[\[File:(.+?)\]\]/g,
             /\[previewicon=\d+(?:;(?:[\w,]+))?;([^\.]+\.\w+)\]\[\/previewicon\]/g,
-            /!\[.*?\]\((.+?)\)/g,
+            // /!\[.*?\]\((.+?)\)/g,
             /\[img](.+?)\[\/img]/g,
         ]) text = text.replace(rx, function(all, name) {
             let slash = name.lastIndexOf("/");
             if (slash >= 0) name = name.substring(slash + 1);
+			name = decodeURIComponent(name);
 			let img = document.querySelector(`img[title="${name}"]`);
             if (!img) img = document.querySelector(`img[title*="${name}"]`);
 			console.log(name, img);

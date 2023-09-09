@@ -17,6 +17,9 @@
         if (!el.tagName) { // text node!
             bb = el.textContent.replace(/\s+/g, " "); // mimicks default white-space style
             if (prev?.tagName == "BR") bb = bb.trimStart(); // avoid spaces at line start
+            if (/\[\/?\w+/.test(bb)) {
+                bb = `[noparse]${bb}[/noparse]`;
+            }
             return bb;
         }
         let tn = el.tagName.toLowerCase();
@@ -25,27 +28,48 @@
             return bb;
         }
         switch (tn) {
-            case "br": return "\n";
-            case "p":
-                sep(prev?.tagName == "P" ? 2 : 1);
-                return bb + printChildNodes(el);
-            case "table": return sep() + "[table]\n" + printChildren(el) + "\n[/table]";
-            case "thead": case "tbody": return printChildren(el);
-            case "h1": case "h2": case "h3":
-                return sep(2) + `[${tn}]${printChildNodes(el)}[/${tn}]`;
+            // inline:
             case "b": case "strong": return `[b]${printChildNodes(el)}[/b]`;
             case "i": case "em": return `[i]${printChildNodes(el)}[/i]`;
+            case "u": return `[u]${printChildNodes(el)}[/u]`;
             case "s": return `[strike]${printChildNodes(el)}[/strike]`;
-            case "a": return `[url=${el.href}]${printChildNodes(el)}[/url]`;
+            case "a": {
+                bb = printChildNodes(el);
+                let href = el.getAttribute("href");
+                if (bb == "!" && !/https?:\/\//.test(href)) { // [!](text) -> spoiler
+                    return `[spoiler]${href}[/spoiler]`;
+                }
+                return `[url=${href}]${bb}[/url]`;
+            };
+            case "mark": return `[spoiler]${printChildNodes(el)}[/spoiler]`;
+            case "code": return "`[u]" + printChildNodes(el) + "[/u]`"; // no "inline code" tag on Steam
+            // non-block elements:
             case "img": return `[img]${el.getAttribute("src")}[/img]`;
-            case "code": return "`[u]" + printChildNodes(el) + "[/u]`";
+            case "br": return "\n";
+            // block elements:
+            case "hr": return sep() + `[hr][/hr]`;
+            case "p": return sep(prev?.tagName == "P" ? 2 : 1) + printChildNodes(el);
+            case "h1": case "h2": case "h3":
+                return sep(2) + `[${tn}]${printChildNodes(el)}[/${tn}]`;
+            case "blockquote": return sep() + `[quote]\n${printChildNodes(el)}\n[/quote]`;
+            case "pre": return sep() + `[code]\n${printChildNodes(el)}\n[/code]`;
+            // lists:
             case "ul": case "ol":
                 tn = tn == "ul" ? "list" : "olist";
                 return sep() + `[${tn}]\n${printChildren(el)}\n[/${tn}]`;
             case "li": return sep() + "[*] " + printChildNodes(el);
+            // tables:
+            case "table": return sep() + "[table]\n" + printChildren(el) + "\n[/table]";
+            case "thead": case "tbody": return printChildren(el);
             case "tr": return sep() + "[tr]" + printChildren(el) + "[/tr]";
-            case "th": case "td": return `[${tn}]${printChildNodes(el)}[/${tn}]`;
-            case "blockquote": return sep() + `[quote]\n${printChildren(el)}\n[/quote]`;
+            case "th": case "td":
+                /*if (el.childNodes.length == 1 && el.childNodes[0].tagName == "CODE") {
+                    // turn Small Code into Big Code if that's the only thing in a table cell:
+                    el = el.childNodes[0];
+                    return `[${tn}][code]${printChildNodes(el)}[/code][/${tn}]`;
+                }//*/
+                return `[${tn}]${printChildNodes(el)}[/${tn}]`;
+            case "script": case "style": return "";
         }
         return el.textContent.trim();
     };
