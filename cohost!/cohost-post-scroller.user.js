@@ -2,7 +2,7 @@
 // @name         Cohost post scroller
 // @namespace    https://yal.cc
 // @version      0.1
-// @description  Lets you jump between post by pressing Home/End
+// @description  Lets you jump between posts by pressing Home/End
 // @author       YellowAfterlife
 // @match        https://cohost.org/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=cohost.org
