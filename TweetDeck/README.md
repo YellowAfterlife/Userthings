@@ -1,6 +1,6 @@
 # TweetDeck things
 
-Ah, \[legacy] TweetDeck. How long until it's completely obliterated in favor of the buggy, laggy new version? Cherish the things while you still have them.
+Remember when Twitter used to have a usable frontend? None of this works anymore.
 
 ### [Horizontal menu](tweetdeck-horizontal-menu.user.css)
 
