@@ -19,3 +19,23 @@ So I had this idea for a userscript that makes it so that Home / End let you mov
 ![](./cohost-post-scroller.gif?v1)
 
 </details>
+
+## [Avatar peek](cohost-avatar-peek.user.css)
+
+![](cohost-av-peek.png)
+
+<details><summary>GIF</summary>
+
+![](cohost-av-peek.gif)
+
+</details>
+
+"Zooms" user avatars when you hover your mouse over them.
+
+Pretty sure that I made this after seeing
+[this post](https://cohost.org/blep/post/4802529-recently-i-found-o)
+from `@blep` and had it lying around ever since.
+
+Works in common spots? (feed, comments, notifications)
+
+Perhaps someone can come up with a better way of doing this effect.
