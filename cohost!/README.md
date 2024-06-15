@@ -38,4 +38,4 @@ from `@blep` and had it lying around ever since.
 
 Works in common spots? (feed, comments, notifications)
 
-Perhaps someone can come up with a better way of doing this effect.
+Perhaps there's a better way of doing this effect.
