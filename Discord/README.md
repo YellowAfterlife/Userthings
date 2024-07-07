@@ -35,6 +35,20 @@ Clicking on an inaccessible
 (e.g. because you don't have Nitro and it's from a different server)
 emoji now copies its URL instead. Such emojis are marked in the picker with a dashed outline.
 
+## [Floating search results](discord-floating-search.css)
+
+| ![](discord-floating-search-1.webp) | ![](discord-floating-search-2.webp) | ![](discord-floating-search-3.webp) |
+|:-:|:-:|:-:|
+
+If you aren't running Discord maximized on desktop,
+search can be a little weird as the dock takes away space from the message area,
+making it harder to look at context around the message.
+
+This is an attempt to fix that - search results will be a floating panel instead,
+folding when mouse isn't over them.
+
+Also works for docked chat in popout.
+
 ## [Tray icon](https://github.com/YAL-Tools/TrayIconForDiscordWeb) (js, Windows)
 
 ![](https://github.com/YAL-Tools/TrayIconForDiscordWeb/raw/main/screenshot.png)

@@ -1,0 +1,38 @@
+/* ==UserStyle==
+@name           discord.com - 9/22/2023, 10:05:55 PM
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         YellowAfterlife
+@preprocessor   less
+==/UserStyle== */
+
+@-moz-document domain("discord.com") {
+    /* Insert code here... */
+    section[class^="searchResultsWrap"],
+    div[class^="channelChatWrapper"] div[class^="resizeHandle"] + div[class^="container"] {
+        position: absolute;
+        right: 1.2em;
+        top: 0.3em;
+        bottom: 4.5em;
+        border-radius: 0.5em;
+        filter: drop-shadow(0 8px 40px hsl(var(--black-500-hsl)/.32));
+        transform-origin: 100% 50%;
+        transform: perspective(4000px) rotateY(0deg);
+        transition: all 0.3s ease-in-out;
+        &[class^="container"] {
+            z-index: 100;
+            right: 0.3em;
+            bottom: 0.3em;
+        }
+        &:not(:hover):not(:active) {
+            --right: -360px;
+            --opacity: 0.1;
+            transform: perspective(4000px) rotateY(-75deg);
+            opacity: 0.3;
+        }
+    }
+    div[class^="channelChatWrapper"] div[class^="chatTarget"] + div[class^="resizeHandle"] {
+        width: 100px;
+    }
+}

@@ -1,9 +1,10 @@
 /* ==UserStyle==
 @name           itch.io: dashboard grid
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @description    Shows dashboard project list in a grid layout.
 @author         YellowAfterlife
+@preprocessor   less
 ==/UserStyle== */
 
 @-moz-document url("https://itch.io/dashboard") {
@@ -13,67 +14,79 @@ body[data-page_name="dashboard"] div[data-url="/feedback"] {
 body[data-page_name="dashboard"] .main .inner_column {
     width: calc(100% - 40px);
 }
-.dashboard_page .dashboard_columns {
-    flex-direction: column;
-}
-.dashboard_page .dashboard_columns .left_col {
-    order: 2;
-}
-.dashboard_page .dashboard_columns .right_col {
-    width: 100%;
-}
-.dashboard_page .right_col .graph_container {
-    width: 450px;
-    float: left;
-}
-.dashboard_page .left_col .buttons {
-    clear: both;
-}
-.dashboard_page .left_col .game_list {
-    margin-left: -5px;
+.dashboard_page {
+    .dashboard_columns {
+        flex-direction: column;
+        .right_col { /* recently updated pages, etc. */
+            width: 100%;
+            .graph_container { /* views/download boxes */
+                width: 450px;
+                float: left;
+            }
+        }
+        .left_col { /* holds the game list */
+            order: 2;
+            .buttons {
+                clear: both;
+            }
+        }
+    }
+    .game_list {
+        margin-left: -5px;
         justify-content: center;
-}
-.dashboard_page  .left_col .game_list {
-    display: flex;
-    flex-wrap: wrap;
-}
-.dashboard_page  .left_col .game_list .game_row {
-    margin-left: 5px;
-    margin-bottom: 5px;
-    box-sizing: border-box;
-    width: 215px;
-    height: 256px;
-    flex-direction: column;
-}
-.dashboard_page .left_col .game_row .game_title {
-    margin-top: 40px;
-}
-.dashboard_page .game_list .cover_image,
-.dashboard_page .game_list .cover_link {
-    width: 100%;
-    height: 168px;
-}
-.dashboard_page .left_col .game_row .game_title,
-.dashboard_page .game_list .game_links {
-    margin: 0;
-}
-.dashboard_page .game_list .game_links {
-    padding: 0 0 0 3px;
-}
-.dashboard_page .game_list .filter_picker_widget {
-    margin-right: 0;
-}
-.dashboard_page .game_list .game_links .publish_status {
-    min-width: 5px;
-}
-.dashboard_page .game_list .publish_status span {
-    height: 33px;
-    border-radius: 0;
-    padding: 0;
-    vertical-align: top;
-    float: right;
-}
-.dashboard_page .game_list .publish_status a {
-    display: none;
+        display: flex;
+        flex-wrap: wrap;
+        .game_row {
+            margin-left: 5px;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            position: relative;
+            .row_columns {
+                flex-direction: column;
+                width: 215px;
+                height: 235px;
+            }
+            .cover_image, .cover_link {
+                width: 100%;
+                height: 168px;
+            }
+            .game_details {
+                flex-grow: 1;
+            }
+            .game_title, .game_links {
+                margin: 0;
+            }
+            .game_links {
+                padding: 0 0 0 3px;
+            }
+            .filter_picker_widget {
+                margin-right: 0;
+            }
+            .publish_status {
+                /* turn publish status into a little ribbon */
+                min-width: 5px;
+                span {
+                    height: 33px;
+                    border-radius: 0;
+                    padding: 0;
+                    vertical-align: top;
+                    float: right;
+                }
+                a {
+                    display: none;
+                }
+            }
+            .project_warning {
+                /* such as "Your page is classified as multiplayer but is missing player count information." */
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                opacity: 0.9;
+                max-height: 165px;
+            }
+        }
+    }
 }
 }
