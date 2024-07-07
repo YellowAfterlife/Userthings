@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           cohost.org - avatar peek
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @description    A new userstyle
 @author         YellowAfterlife
 ==/UserStyle== */
@@ -42,6 +42,13 @@
     }
     *.co-notification-card svg + div.mask:hover > img,
     a[title].mask:hover > img {
+        transform: scale(3);
+        z-index: 100;
+    }
+    *.co-notification-card > .flex-row > img.aspect-square {
+        transition: all 0.1s ease-in-out;
+    }
+    *.co-notification-card > .flex-row > img.aspect-square:hover {
         transform: scale(3);
         z-index: 100;
     }
