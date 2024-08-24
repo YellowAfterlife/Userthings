@@ -1,11 +1,15 @@
 /* ==UserStyle==
 @name           Discord extensions
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @description    Various tweaks for Discord Web
 @preprocessor less
+@var  checkbox  vResizeChannelList "Resizable channel list" 0
 @var  checkbox  vStatusPad "Status bar padding" 1
 @var  checkbox  vHideNitro "Hide Nitro-related items" 1
+@var  checkbox  vHideApps "Hide 'Apps' button" 0
+@var  checkbox  vHideStickers "Hide 'Stickers' button" 0
+@var  checkbox  vHideGIFs "Hide 'GIFs' button" 0
 @var  checkbox  vHideUncommonMsgCtx "Hide uncommon message menu items" 1
 @var  checkbox  vEnlargeEmojiPopup "Big emojis in popups" 1
 @author         YellowAfterlife
@@ -21,6 +25,15 @@
         }
     }
     
+    html when(@vResizeChannelList = 1) {
+        div[class^="content"] > div[class^="sidebar"] {
+            resize: horizontal;
+            > section[class^="panels"] div[class^="avatarWrapper"] {
+                min-width: 40px;
+            }
+        }
+    }
+    
     html when(@vHideNitro = 1) {
         form[class^="form"] div[class^="channelTextArea"] div[class^="buttons"] button[aria-label="Send a gift"] {
             display: none;
@@ -32,9 +45,32 @@
         div[id^="message-reactions"] > div[aria-label="Add Super Reaction"] {
             display: none;
         }
+        ul[aria-label="Direct Messages"] {
+            > li > div{
+                > a[href="/store"],
+                > a[href="/shop"] {
+                    display: none;
+                }
+            }
+        }
         
         #message-actions div[class^="item"][class*="colorPremium"],
         #message div[class^="item"][class*="colorPremium"] {
+            display: none;
+        }
+    }
+    html when(@vHideApps = 1) {
+        div[class^="channelAppLauncher"] {
+            display: none;
+        }
+    }
+    html when(@vHideGIFs = 1) {
+        button[aria-label="Open GIF picker"] {
+            display: none;
+        }
+    }
+    html when(@vHideStickers = 1) {
+        button[aria-label="Open sticker picker"] {
             display: none;
         }
     }
