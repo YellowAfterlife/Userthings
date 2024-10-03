@@ -11,6 +11,8 @@
 @var  checkbox  vHideStickers "Hide 'Stickers' button" 0
 @var  checkbox  vHideGIFs "Hide 'GIFs' button" 0
 @var  checkbox  vHideUncommonMsgCtx "Hide uncommon message menu items" 1
+@var  checkbox  vHideDiscovery "Hide 'Server discovery' button" 1
+@var  checkbox  vHideDownloadApps "Hide 'Download apps' button" 0
 @var  checkbox  vEnlargeEmojiPopup "Big emojis in popups" 1
 @author         YellowAfterlife
 ==/UserStyle== */
@@ -81,6 +83,18 @@
         #message-actions #message-actions-tts,
         #message #message-tts {
             display: none;
+        }
+    }
+    
+    html when(@vHideDiscovery = 1) {
+        div[class^="unreadMentionsIndicatorTop"] ~ div[class^="footer"] {
+            display: none;
+        }
+    }
+    
+    html when(@vHideDownloadApps = 1) {
+        div[class^="unreadMentionsIndicatorTop"] ~ div[class^="scroller"] div[aria-label] ~ div[class^="tutorialContainer"] ~ div[class^="listItem"] {
+            display: none !important;
         }
     }
     
