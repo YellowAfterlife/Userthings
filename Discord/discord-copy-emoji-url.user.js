@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Discord: Copy Emoji URL
 // @namespace    https://yal.cc/
-// @version      0.2
+// @version      0.21
 // @description  If you can't send it directly, copy the URL instead.
 // @author       YellowAfterlife
 // @match        https://discord.com/*
@@ -20,6 +20,9 @@
 	let style = document.createElement("style");
 	style.id = "emoji-with-url";
 	style.innerHTML = `
+	${qryPicker} div[class^="upsellContainer"] {
+		display: none;
+	}
 	${qryPicker} button[${attrCanCopy}] {
 		filter: grayscale(0%);
 	}
@@ -44,6 +47,7 @@
 		} else {
 			url = url.replace(/^(.+?)\b(size=\d+)&(.+)$/, "$1$3&$2");
 		}
+		url = url.replace(/\.webp\b/, ".png");
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		let text = `[⁺](${url})`;
@@ -62,7 +66,7 @@
 		if (!emojiPanel) return;
 		
 		// previously: `button[class*="emojiItemDisabled"]:not([${attrCanCopy}])`
-		let buttons = emojiPanel.querySelectorAll(`div[class*="categorySectionNitroLocked"] button:not([${attrCanCopy}])`);
+		let buttons = emojiPanel.querySelectorAll(`div[class*="categorySectionNitroLocked"] button:not([${attrCanCopy}]):not([aria-label])`);
 		for (let button of buttons) {
 			button.setAttribute(attrCanCopy, "");
 			let img = button.querySelector("img");
