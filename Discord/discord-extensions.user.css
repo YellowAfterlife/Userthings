@@ -87,14 +87,22 @@
     }
     
     html when(@vHideDiscovery = 1) {
-        div[class^="unreadMentionsIndicatorTop"] ~ div[class^="footer"] {
-            display: none;
+        div[class^="unreadMentionsIndicatorTop"] {
+            & ~ div[class^="footer"],
+            & ~ div > div[class^="footer"],{
+                display: none;
+            }
         }
     }
     
     html when(@vHideDownloadApps = 1) {
-        div[class^="unreadMentionsIndicatorTop"] ~ div[class^="scroller"] div[aria-label] ~ div[class^="tutorialContainer"] ~ div[class^="listItem"] {
-            display: none !important;
+        div[class^="unreadMentionsIndicatorTop"] {
+            & ~ div[class^="scroller"],
+            & ~ div > div[class^="scroller"] {
+                div[aria-label] ~ div[class^="tutorialContainer"] ~ div[class^="listItem"] {
+                    display: none !important;
+                }
+            }
         }
     }
     
