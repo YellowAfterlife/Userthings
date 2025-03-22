@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Markdown -> (Steam) BB Code
 // @namespace    https://yal.cc
-// @version      0.1
+// @version      0.11
 // @description  Adds a button to jbt's Markdown Editor to generate Steam guide compatible BB code
 // @author       YellowAfterlife
 // @match        https://jbt.github.io/markdown-editor/
@@ -36,8 +36,8 @@
             case "a": {
                 bb = printChildNodes(el);
                 let href = el.getAttribute("href");
-                if (bb == "!" && !/https?:\/\//.test(href)) { // [!](text) -> spoiler
-                    return `[spoiler]${href}[/spoiler]`;
+                if (bb == "!" && !/https?:\/\//.test(href) || href == "!") { // [!](text) / [text](!) -> spoiler
+                    return `[spoiler]${href == "!" ? bb : href}[/spoiler]`;
                 }
                 return `[url=${href}]${bb}[/url]`;
             };
@@ -87,21 +87,44 @@
         }
         return out;
     }
-    
-    let bbIco = document.createElement("i");
-    bbIco.className = "material-icons";
-    bbIco.innerText = "forum";
-
-    let bbBt = document.createElement("p");
-    bbBt.append(bbIco);
-    bbBt.className = "navbutton left";
-    bbBt.title = "Copy BB code";
-    bbBt.onclick = () => {
-        let out = printChildren(document.getElementById("out"));
-        console.log(out);
-        navigator.clipboard.writeText(out);
-    }
-    
+    //
     let menu = document.getElementById("navcontent");
-    menu.append(bbBt);
+    let addButton = (label, title, click) => {
+        let bbIco = document.createElement("i");
+        bbIco.className = "material-icons";
+        bbIco.innerText = label;
+        //
+        let bbBt = document.createElement("p");
+        bbBt.append(bbIco);
+        bbBt.className = "navbutton left";
+        bbBt.title = title;
+        bbBt.onclick = click;
+        //
+        menu.append(bbBt);
+    }
+    //
+    addButton("forum", "Copy BB code", () => {
+        let bb = printChildren(document.getElementById("out"));
+        console.log(bb);
+        navigator.clipboard.writeText(bb);
+    });
+    addButton("business", "Copy HTML code", () => {
+        let out = document.getElementById("out");
+        let first = true;
+        for (let h of out.querySelectorAll("h1, h2, h3")) {
+            if (h.id) continue;
+            if (first) {
+                first = false;
+                h.before(new Comment("more"));
+            }
+            let id = h.innerText;
+            id = id.replace(/ /g, "-");
+            id = id.replace(/[^\w\-_\.]/g, "");
+            h.id = id;
+        }
+        let html = document.getElementById("out").innerHTML;
+        // console.log(html);
+        navigator.clipboard.writeText(html);
+    });
+    //
 })();
