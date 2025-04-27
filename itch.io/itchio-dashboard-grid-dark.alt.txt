@@ -1,0 +1,9 @@
+A screenshot of my itch.io dashboard as it appears by default. Each project gets a little row with name/description/controls. About 12 projects fit on screen at once.
+
+A screenshot of my itch.io dashboard with the userstyle applied. Projects are laid out in a grid/thumbnail view instead, fitting about 35 projects on screen at once instead.
+
+Did you know? I once made a userstyle for itchio that re-arranges the dashboard into a grid layout! Nice if you have a lot of projects or prefer larger icons in general.
+
+It's now up on USW too:
+
+https://userstyles.world/style/20785/dashboard-grid-for-itch-io
