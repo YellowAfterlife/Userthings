@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Markdown -> (Steam) BB Code
 // @namespace    https://yal.cc
-// @version      0.11
+// @version      0.12
 // @description  Adds a button to jbt's Markdown Editor to generate Steam guide compatible BB code
 // @author       YellowAfterlife
 // @match        https://jbt.github.io/markdown-editor/
@@ -11,7 +11,21 @@
 
 (function() {
     'use strict';
-    
+    //
+    const style = document.createElement("style");
+    style.innerHTML = `
+    a[href="!"] {
+        background: black;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 0 8px;
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+    `;
+    document.head.appendChild(style);
+    //
     let print = (el, prev) => {
         let bb = "";
         if (!el.tagName) { // text node!
