@@ -10,6 +10,7 @@
 @var  checkbox  vHideApps "Hide 'Apps' button" 0
 @var  checkbox  vHideStickers "Hide 'Stickers' button" 0
 @var  checkbox  vHideGIFs "Hide 'GIFs' button" 0
+@var  checkbox  vHideGames "Hide 'Games/Apps' button" 0
 @var  checkbox  vHideUncommonMsgCtx "Hide uncommon message menu items" 1
 @var  checkbox  vHideDiscovery "Hide 'Server discovery' button" 1
 @var  checkbox  vHideDownloadApps "Hide 'Download apps' button" 0
@@ -39,8 +40,11 @@
     }
     
     html when(@vHideNitro = 1) {
-        form[class^="form"] div[class^="channelTextArea"] div[class^="buttons"] button[aria-label="Send a gift"] {
-            display: none;
+        form[class^="form"] div[class^="channelTextArea"] div[class^="buttons"] {
+            button[aria-label="Send a gift"],
+            div[role="button"][aria-label="Send a gift"] {
+                display: none;
+            }
         }
         
         div[aria-label="Add Super Reaction"][class^="button"] {
@@ -69,12 +73,19 @@
         }
     }
     html when(@vHideGIFs = 1) {
-        button[aria-label="Open GIF picker"] {
+        button[aria-label="Open GIF picker"],
+        div[role="button"][aria-label="Open GIF picker"] {
             display: none;
         }
     }
     html when(@vHideStickers = 1) {
-        button[aria-label="Open sticker picker"] {
+        button[aria-label="Open sticker picker"],
+        div[role="button"][aria-label="Open sticker picker"] {
+            display: none;
+        }
+    }
+    html when(@vHideGames = 1) {
+        button[aria-label="Apps"] {
             display: none;
         }
     }
@@ -127,7 +138,8 @@
     }
     
     /* fix pure-white names unreadable in light theme */
-    html.theme-light span[role="button"][class^="username"][style="color: rgb(255, 255, 255);"] {
+    html.theme-light span[role="button"][class^="username"][style="color: rgb(255, 255, 255);"],
+    html.theme-light span[role="button"][tabindex="-1"][class^="roleMention"][style^="color: rgb(255, 255, 255)"] {
         color: black!important;
     }
     div[class^="emojiSection"] > div[class^="flex"] > img[class^="emoji"] {
