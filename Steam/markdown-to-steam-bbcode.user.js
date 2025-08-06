@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Markdown -> (Steam) BB Code
 // @namespace    https://yal.cc
-// @version      0.12
+// @version      0.13
 // @description  Adds a button to jbt's Markdown Editor to generate Steam guide compatible BB code
 // @author       YellowAfterlife
 // @match        https://jbt.github.io/markdown-editor/
@@ -14,7 +14,7 @@
     //
     const style = document.createElement("style");
     style.innerHTML = `
-    a[href="!"] {
+    a[href="!"], a[href="#s"], a[href="#spoiler"] {
         background: black;
         color: rgba(255, 255, 255, 0.7);
         padding: 0 8px;
@@ -50,8 +50,13 @@
             case "a": {
                 bb = printChildNodes(el);
                 let href = el.getAttribute("href");
-                if (bb == "!" && !/https?:\/\//.test(href) || href == "!") { // [!](text) / [text](!) -> spoiler
-                    return `[spoiler]${href == "!" ? bb : href}[/spoiler]`;
+                if (bb == "!" && !/https?:\/\//.test(href)) {
+                    // [!](spoiler text)
+                    return `[spoiler]$href[/spoiler]`;
+                }
+                if (href == "!" || href == "#s" || href == "#spoiler") {
+                    // [spoiler text](!)
+                    return `[spoiler]${bb}[/spoiler]`;
                 }
                 return `[url=${href}]${bb}[/url]`;
             };
