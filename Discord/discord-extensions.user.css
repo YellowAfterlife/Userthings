@@ -1,19 +1,20 @@
 /* ==UserStyle==
 @name           Discord extensions
 @namespace      github.com/openstyles/stylus
-@version        1.0.2
+@version        1.0.3
 @description    Various tweaks for Discord Web
 @preprocessor less
 @var  checkbox  vResizeChannelList "Resizable channel list" 0
 @var  checkbox  vStatusPad "Status bar padding" 1
 @var  checkbox  vHideNitro "Hide Nitro-related items" 1
-@var  checkbox  vHideApps "Hide 'Apps' button" 0
-@var  checkbox  vHideStickers "Hide 'Stickers' button" 0
-@var  checkbox  vHideGIFs "Hide 'GIFs' button" 0
-@var  checkbox  vHideGames "Hide 'Games/Apps' button" 0
-@var  checkbox  vHideUncommonMsgCtx "Hide uncommon message menu items" 1
-@var  checkbox  vHideDiscovery "Hide 'Server discovery' button" 1
-@var  checkbox  vHideDownloadApps "Hide 'Download apps' button" 0
+@var  checkbox  vHideQuests "Hide the 'Quests' button" 0
+@var  checkbox  vHideApps "Hide the 'Apps' button" 0
+@var  checkbox  vHideStickers "Hide the 'Stickers' button" 0
+@var  checkbox  vHideGIFs "Hide the 'GIFs' button" 0
+@var  checkbox  vHideGames "Hide the 'Games/Apps' button" 0
+@var  checkbox  vHideUncommonMsgCtx "Hide the uncommon message menu items" 1
+@var  checkbox  vHideDiscovery "Hide the 'Server discovery' button" 1
+@var  checkbox  vHideDownloadApps "Hide the 'Download apps' button" 0
 @var  checkbox  vEnlargeEmojiPopup "Big emojis in popups" 1
 @var  checkbox  vBigEmojiPicker "Big emoji picker" 1
 @var  checkbox  vTinyGifOverlays "Tiny GIF overlay" 0
@@ -54,7 +55,8 @@
             display: none;
         }
         ul[aria-label="Direct Messages"] {
-            > li > div{
+            > div > li > div,
+            > li > div {
                 > a[href="/store"],
                 > a[href="/shop"] {
                     display: none;
@@ -65,6 +67,16 @@
         #message-actions div[class^="item"][class*="colorPremium"],
         #message div[class^="item"][class*="colorPremium"] {
             display: none;
+        }
+    }
+    html when(@vHideQuests = 1) {
+        ul[aria-label="Direct Messages"] {
+            > div > li > div,
+            > li > div {
+                > a[href="/quest-home"] {
+                    display: none;
+                }
+            }
         }
     }
     html when(@vHideApps = 1) {
@@ -100,21 +112,17 @@
     }
     
     html when(@vHideDiscovery = 1) {
-        div[class^="unreadMentionsIndicatorTop"] {
-            & ~ div[class^="footer"],
-            & ~ div > div[class^="footer"],{
+        div[class^="unreadMentionsIndicatorTop"] ~ ul {
+            div[class^="tutorialContainer"] + div {
                 display: none;
             }
         }
     }
     
     html when(@vHideDownloadApps = 1) {
-        div[class^="unreadMentionsIndicatorTop"] {
-            & ~ div[class^="scroller"],
-            & ~ div > div[class^="scroller"] {
-                div[aria-label] ~ div[class^="tutorialContainer"] ~ div[class^="listItem"] {
-                    display: none !important;
-                }
+        div[class^="unreadMentionsIndicatorTop"] ~ ul {
+            div[class^="tutorialContainer"] + div + div {
+                display: none;
             }
         }
     }

@@ -1,0 +1,4 @@
+A GIF shows the userscript in action - upon clicking the "Open inbox" button a small floating window with notifications shows up.
+
+If you use Reddit and aren't fond of how the inbox/notifications are now a separate page, good news - I made a userscript that re-creates the "mini inbox" as it appeared before the March 2025 change
+https://greasyfork.org/en/scripts/533909-reddit-mini-inbox/
