@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Discord extensions
 @namespace      github.com/openstyles/stylus
-@version        1.0.3
+@version        1.0.4
 @description    Various tweaks for Discord Web
 @preprocessor less
 @var  checkbox  vResizeChannelList "Resizable channel list" 0
@@ -41,7 +41,7 @@
     }
     
     html when(@vHideNitro = 1) {
-        form[class^="form"] div[class^="channelTextArea"] div[class^="buttons"] {
+        form[class*="-form"] div[class*="-channelTextArea"] div[class*="-buttons"] {
             button[aria-label="Send a gift"],
             div[role="button"][aria-label="Send a gift"] {
                 display: none;
@@ -80,8 +80,10 @@
         }
     }
     html when(@vHideApps = 1) {
-        div[class^="channelAppLauncher"] {
-            display: none;
+        form[class*="-form"] div[class*="-channelTextArea"] div[class*="-buttons"] {
+            div[aria-label="Apps"] {
+                display: none;
+            }
         }
     }
     html when(@vHideGIFs = 1) {
@@ -112,19 +114,19 @@
     }
     
     html when(@vHideDiscovery = 1) {
-        div[class^="unreadMentionsIndicatorTop"] ~ ul {
+        /*div[class^="unreadMentionsIndicatorTop"] + ul {
             div[class^="tutorialContainer"] + div {
                 display: none;
             }
-        }
+        }*/
     }
     
     html when(@vHideDownloadApps = 1) {
-        div[class^="unreadMentionsIndicatorTop"] ~ ul {
+        /*div[class^="unreadMentionsIndicatorTop"] + ul {
             div[class^="tutorialContainer"] + div + div {
                 display: none;
             }
-        }
+        }*/
     }
     
     :root when(@vBigEmojiPicker = 1) {
@@ -137,7 +139,7 @@
     }
     
     html when(@vTinyGifOverlays = 1) {
-        div[class^="imageAccessory"] {
+        div[class*="-imageAccessory"] {
             top: 2px;
             left: 2px;
             transform: scale(0.5);
@@ -146,15 +148,15 @@
     }
     
     /* fix pure-white names unreadable in light theme */
-    html.theme-light span[role="button"][class^="username"][style="color: rgb(255, 255, 255);"],
-    html.theme-light span[role="button"][tabindex="-1"][class^="roleMention"][style^="color: rgb(255, 255, 255)"] {
+    html.theme-light span[role="button"][class*="username"][style="color: rgb(255, 255, 255);"],
+    html.theme-light span[role="button"][tabindex="-1"][class*="roleMention"][style^="color: rgb(255, 255, 255)"] {
         color: black!important;
     }
-    div[class^="emojiSection"] > div[class^="flex"] > img[class^="emoji"] {
+    div[class*="emojiSection"] > div[class*="flex"] > img[class*="emoji"] {
         width: 128px!important;
         height: 128px!important;
-    }
-    div[class^="emojiSection"] > div[class^="flex"] > img[class^="emoji"] + div {
-        width: 100px;
+        & + div {
+            width: 100px;
+        }
     }
 }
