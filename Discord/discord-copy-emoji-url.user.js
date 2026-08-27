@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Discord: Copy Emoji URL
 // @namespace    https://yal.cc/
-// @version      0.21
+// @version      0.22
 // @description  If you can't send it directly, copy the URL instead.
 // @author       YellowAfterlife
 // @match        https://discord.com/*
@@ -50,8 +50,9 @@
 		url = url.replace(/\.webp\b/, ".png");
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		let text = `[⁺](${url})`;
-		navigator.clipboard.writeText(text);
+		let text = img.alt || "⁺";
+		let md = `[${text}](${url})`;
+		navigator.clipboard.writeText(md);
 		let bt = img.parentElement;
 		bt.setAttribute(attrCanCopy, "flash");
 		setTimeout(() => bt.setAttribute(attrCanCopy, ""), 250);
@@ -64,25 +65,16 @@
 	setInterval(function() {
 		let emojiPanel = document.querySelector(`#emoji-picker-tab-panel[role="tabpanel"]`);
 		if (!emojiPanel) return;
-		
-		// previously: `button[class*="emojiItemDisabled"]:not([${attrCanCopy}])`
-		let buttons = emojiPanel.querySelectorAll(`div[class*="categorySectionNitroLocked"] button:not([${attrCanCopy}]):not([aria-label])`);
-		for (let button of buttons) {
-			button.setAttribute(attrCanCopy, "");
-			let img = button.querySelector("img");
-			img.addEventListener("click", emojiClicked);
-		}
 		//
-		let locks = emojiPanel.querySelectorAll(`button[class*="emojiItem"] > div[class*="emojiLockIcon"]:not([${attrCanCopy}])`);
-		for (let lock of locks) {
-			let button = lock.parentElement;
-			lock.setAttribute(attrCanCopy, "");
-			lock.style.display = "none";
+		let images = emojiPanel.querySelectorAll(`img[class*="lockedEmoji"]`)
+		for (let img of images) {
+			let button = img.parentElement;
 			button.setAttribute(attrCanCopy, "");
-			let img = button.querySelector("img");
 			img.addEventListener("click", emojiClicked);
+			//
+			let lock = button.querySelector(`& > div[class*="emojiLockIconContainer"]`);
+			if (lock) lock.remove();
 		}
-		//if (todo.length > 0) trace(`Added handlers for ${todo.length} items`);
 	}, 250);
-	trace("hey ho");
+	trace("Greetings from Copy Emoji URL!");
 })();
