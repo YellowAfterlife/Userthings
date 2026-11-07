@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Discord: Copy Emoji URL
 // @namespace    https://yal.cc/
-// @version      0.22
+// @version      0.23
 // @description  If you can't send it directly, copy the URL instead.
 // @author       YellowAfterlife
 // @match        https://discord.com/*
@@ -66,14 +66,13 @@
 		let emojiPanel = document.querySelector(`#emoji-picker-tab-panel[role="tabpanel"]`);
 		if (!emojiPanel) return;
 		//
-		let images = emojiPanel.querySelectorAll(`img[class*="lockedEmoji"]`)
-		for (let img of images) {
-			let button = img.parentElement;
+		for (let lock of emojiPanel.querySelectorAll(`div[class*="emojiLockIconContainer"]`)) {
+			let button = lock.parentElement;
+			let img = button.querySelector("img");
 			button.setAttribute(attrCanCopy, "");
 			img.addEventListener("click", emojiClicked);
 			//
-			let lock = button.querySelector(`& > div[class*="emojiLockIconContainer"]`);
-			if (lock) lock.remove();
+			lock.remove();
 		}
 	}, 250);
 	trace("Greetings from Copy Emoji URL!");
