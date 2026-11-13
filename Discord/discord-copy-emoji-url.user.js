@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Discord: Copy Emoji URL
 // @namespace    https://yal.cc/
-// @version      0.23
+// @version      0.24
 // @description  If you can't send it directly, copy the URL instead.
 // @author       YellowAfterlife
 // @match        https://discord.com/*
@@ -66,7 +66,12 @@
 		let emojiPanel = document.querySelector(`#emoji-picker-tab-panel[role="tabpanel"]`);
 		if (!emojiPanel) return;
 		//
-		for (let lock of emojiPanel.querySelectorAll(`div[class*="emojiLockIconContainer"]`)) {
+		for (let img of emojiPanel.querySelectorAll(`div[class*="categorySectionNitroLocked"]:not([${attrCanCopy}]) img`)) {
+			let button = img.parentElement;
+			button.setAttribute(attrCanCopy, "");
+			img.addEventListener("click", emojiClicked);
+		}
+		for (let lock of emojiPanel.querySelectorAll(`div[class*="emojiLockIconContainer"]:not([${attrCanCopy}])`)) {
 			let button = lock.parentElement;
 			let img = button.querySelector("img");
 			button.setAttribute(attrCanCopy, "");
